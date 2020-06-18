@@ -1,10 +1,3 @@
-///
-//  Generated code. Do not modify.
-//  source: xchain.proto
-//
-// @dart = 2.3
-// ignore_for_file: camel_case_types,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type
-
 import 'chainedbft.pbjson.dart' as $0;
 
 const XChainErrorEnum$json = const {
@@ -1277,4 +1270,3 @@ const XchainServiceBase$messageJson = const {
   '.pb.ContractList': ContractList$json,
   '.pb.InvokeRPCResponse': InvokeRPCResponse$json,
 };
-

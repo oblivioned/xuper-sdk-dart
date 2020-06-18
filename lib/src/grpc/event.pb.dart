@@ -655,4 +655,3 @@ class PubsubServiceApi {
     return _client.invoke<UnsubscribeResponse>(ctx, 'PubsubService', 'Unsubscribe', request, emptyResponse);
   }
 }
-
