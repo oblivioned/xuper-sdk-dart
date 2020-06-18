@@ -1,13 +1,10 @@
 part of 'package:xuper_sdk/crypto.dart';
 
-const int _shaBytes = 256 ~/ 8;
-// keccak is implemented as sha3 digest in pointycastle, see
-// https://github.com/PointyCastle/pointycastle/issues/128
-final SHA3Digest sha3digest = SHA3Digest(_shaBytes * 8);
+final SHA256Digest sha256digest = SHA256Digest();
 
 Uint8List keccak256(Uint8List input) {
-  sha3digest.reset();
-  return sha3digest.process(input);
+  sha256digest.reset();
+  return sha256digest.process(input);
 }
 
 Uint8List keccakUtf8(String input) {

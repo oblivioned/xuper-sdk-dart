@@ -32,15 +32,6 @@ BigInt generateNewPrivateKey(Random random) {
   return privateKey.d;
 }
 
-/// Constructs the Ethereum address associated with the given public key by
-/// taking the lower 160 bits of the key's sha3 hash.
-Uint8List publicKeyToAddress(Uint8List publicKey) {
-  assert(publicKey.length == 64);
-
-  final hashed = sha3digest.process(publicKey);
-  return Uint8List.view(hashed.buffer, _shaBytes - 20);
-}
-
 /// Signatures used to sign Ethereum transactions and messages.
 class MsgSignature {
   final BigInt r;

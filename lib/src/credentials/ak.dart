@@ -23,4 +23,14 @@ class AK_ECDSA implements AK {
     factory AK_ECDSA.generateKey() => AK_ECDSA(generateNewPrivateKey(Random.secure()));
 
     factory AK_ECDSA.fromHex(String hex) => AK_ECDSA(bytesToInt(hexToBytes(hex)));
+
+    // factory AK_ECDSA.fromParams(BigInt x, BigInt y, BigInt d) {
+    //
+    //
+    //     final key = ECPrivateKey(d, _params);
+    //
+    //     final pubPoint = _params.curve.createPoint(x, y);
+    //
+    //     final pub = ECPublicKey(pubPoint, _params);
+    // }
 }
