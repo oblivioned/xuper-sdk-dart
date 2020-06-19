@@ -1,6 +1,6 @@
 part of 'package:xuper_sdk/crypto.dart';
 
-final ECDomainParameters _params = ECCurve_secp256k1();
+final ECDomainParameters _params = ECCurve_prime256v1();
 final BigInt _halfCurveOrder = _params.n >> 1;
 
 /// Generates a public key for the given private key using the ecdsa curve which

@@ -7,13 +7,12 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:pointycastle/api.dart';
-import 'package:pointycastle/ecc/curves/secp256k1.dart';
+import 'package:pointycastle/ecc/curves/prime256v1.dart';
 import 'package:pointycastle/ecc/api.dart';
 import 'package:pointycastle/key_generators/api.dart';
 import 'package:pointycastle/key_generators/ec_key_generator.dart';
 import 'package:pointycastle/macs/hmac.dart';
 import 'package:pointycastle/signers/ecdsa_signer.dart';
-import 'package:pointycastle/digests/sha3.dart';
 import 'package:pointycastle/digests/sha256.dart';
 import 'package:convert/convert.dart';
 
