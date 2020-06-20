@@ -24,6 +24,6 @@ import 'src/utils/typed_data.dart';
 // no part directive because there is no reason to export this
 import 'src/crypto/random_bridge.dart';
 
-part 'src/crypto/secp256k1.dart';
+part 'src/crypto/prime256v1.dart';
 part 'src/crypto/formatting.dart';
 part 'src/crypto/keccac.dart';

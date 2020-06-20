@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:convert';
 import 'dart:typed_data';
 
@@ -5,44 +6,40 @@ import 'package:xuper_sdk/crypto.dart';
 import 'package:xuper_sdk/credentials.dart';
 import 'package:test/test.dart';
 
-import 'package:pointycastle/api.dart';
-import 'package:pointycastle/ecc/curves/secp256k1.dart';
-import 'package:pointycastle/ecc/api.dart';
-import 'package:pointycastle/digests/ripemd160.dart';
-import 'package:pointycastle/key_generators/api.dart';
-import 'package:pointycastle/key_generators/ec_key_generator.dart';
-import 'package:pointycastle/macs/hmac.dart';
-import 'package:pointycastle/signers/ecdsa_signer.dart';
-import 'package:pointycastle/digests/sha3.dart';
-import 'package:pointycastle/digests/sha256.dart';
-import 'package:convert/convert.dart';
-
-
-final ECDomainParameters _params = ECCurve_secp256k1();
-
 void main() => defineTests();
-
-AsymmetricKeyPair _keyPair(
-        ECDomainParameters domainParams, String Qx, String Qy, String d) =>
-    AsymmetricKeyPair(
-        ECPublicKey(
-            domainParams.curve.createPoint(BigInt.parse(Qx), BigInt.parse(Qy)),
-            domainParams),
-        ECPrivateKey(BigInt.parse(d), domainParams));
 
 void defineTests() {
   group('ak', () {
-    test('test generateKey', () {
-      // TODO: Implement test.
-      final ak = AK_ECDSA.generateKey();
-      print('Address: ${ak.address}');
-      print('PrivateKey: ${ak.privateKey.toString()}');
+    test('test generate and fromHex', () {
+      final ak = AK.generateKey();
+      final fromHexAK = AK.fromHex(ak.privateKeyHex);
+      expect(ak.address.toString(), fromHexAK.address.toString());
     });
-    // test('test fromHex', () {
-    //   final ak = AK_ECDSA(BigInt.parse(
-    //       '29079635126530934056640915735344231956621504557963207107451663058887647996601'));
-    //   print('Address: ${ak.address}');
-    // });
+    test('test fromHex', () {
+      final ak = AK.fromPrivateKey(BigInt.parse(
+          '29079635126530934056640915735344231956621504557963207107451663058887647996601'));
+      print('Address: ${ak.address}');
+    });
+    test('test from privatekey', () {
+      final addresses = [
+        'dpzuVdosQrF2kmzumhVeFQZa1aYcdgFpN',
+        'WNWk3ekXeM5M2232dY2uCJmEqWhfQiDYT',
+        'akf7qunmeaqb51Wu418d6TyPKp4jdLdpV',
+      ];
+      final privatekeys = [
+        BigInt.parse(
+            '29079635126530934056640915735344231956621504557963207107451663058887647996601'),
+        BigInt.parse(
+            '98698032903818677365237388430412623738975596999573887926929830968230132692775'),
+        BigInt.parse(
+            '57537645914107818014162200570451409375770015156750200591470574847931973776404'),
+      ];
+      for (int i = 0; i < privatekeys.length; i++) {
+        final ak = AK.fromPrivateKey(privatekeys[i]);
+        print(ak.address);
+        // expect(addresses[i], ak.address.toString());
+      }
+    });
   });
 }
 
