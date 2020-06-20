@@ -6,18 +6,16 @@ class Address {
 
   Address._(this._bytes);
 
-  factory Address.fromPublicKeyBytes(Uint8List pub) => Address.fromPublicKey(bytesToInt(pub));
-
   factory Address.fromBase58(String base58String) =>
       Address._(Base58Decode(base58String));
 
-  factory Address.fromPublicKey(BigInt pub) {
+  factory Address.fromPublicKey(Uint8List pub) {
 
     // 1.Marshal Data 4为常量，暂时不知表示的意思
-    final pubBytes = intToBytes(pub);
+    // final pubBytes = intToBytes(pub);
 
     // 2.SHA256
-    final pubBytesSHA = keccak256(pubBytes);
+    final pubBytesSHA = keccak256(pub);
 
     // 3.Ripemd160
     // 4.在头部写入地址版本

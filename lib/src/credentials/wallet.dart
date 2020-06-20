@@ -180,7 +180,7 @@ class Wallet {
     final aesKey = Uint8List.view(derived.buffer, 0, 16);
 
     final aes = _initCipher(true, aesKey, _iv);
-    return aes.process(intToBytes(ak.privateKey));
+    return aes.process(ak.privateKey);
   }
 }
 

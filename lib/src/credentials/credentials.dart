@@ -1,18 +1,12 @@
 part of 'package:xuper_sdk/credentials.dart';
 
 abstract class Credentials {
-  BigInt get privateKey;
-  String get privateKeyHex;
-  String get privateKeyBase64;
-
-  BigInt get publickKey;
-  String get publickKeyHex;
-  String get publickKeyBase64;
-
+  Uint8List get privateKey;
+  Uint8List get publickKey;
   Address get address;
 
   // SignatureInfo signMessageBytes(Uint8List data);
-  // SignatureInfo signMessage(String message);
+  pb.SignatureInfo signMessage(String message);
 }
 
 enum AKCurve {
@@ -34,36 +28,22 @@ class AK implements Credentials {
   final ECDomainParameters _params;
   final BigInt _privateKey;
 
-  BigInt _publicKey;
+  ECPoint _publicKey;
   Address _address;
 
   @override
-  BigInt get privateKey => _privateKey;
+  Uint8List get privateKey => intToBytes(_privateKey);
 
   @override
-  String get privateKeyHex =>
-      bytesToHex(intToBytes(_privateKey), include0x: true);
-
-  @override
-  String get privateKeyBase64 => base64.encode(intToBytes(_privateKey));
-
-  @override
-  BigInt get publickKey => _publicKey;
-
-  @override
-  String get publickKeyHex =>
-      bytesToHex(intToBytes(_publicKey), include0x: true);
-
-  @override
-  String get publickKeyBase64 => base64.encode(intToBytes(_publicKey));
+  Uint8List get publickKey =>
+      Uint8List.view(_publicKey.getEncoded(false).buffer, 0);
 
   @override
   Address get address => _address;
 
   AK._(this._params, this._privateKey) {
-    _publicKey = bytesToInt(
-        Uint8List.view((_params.G * _privateKey).getEncoded(false).buffer, 0));
-    _address = Address.fromPublicKey(_publicKey);
+    _publicKey = _params.G * _privateKey;
+    _address = Address.fromPublicKey(publickKey);
   }
 
   factory AK.generateKey({AKCurve curve = AKCurve.P256}) {
@@ -89,39 +69,29 @@ class AK implements Credentials {
   factory AK.fromHex(String hex, {AKCurve curve = AKCurve.P256}) =>
       AK._(_eccurveParametersFrom(curve), bytesToInt(hexToBytes(hex)));
 
-  String _sign(Uint8List data) {
-    final ctr = BlockCipher('AES/CTR');
+  pb.SignatureInfo _sign(Uint8List data) {
+    final signer = ECDSASigner(null, Mac('SHA-256/HMAC'))
+      ..init(true, PrivateKeyParameter(ECPrivateKey(_privateKey, _params)));
 
-    print(ECDSASigner.FACTORY_CONFIG.type.toString());
-    final signer = ECDSASigner(SHA256Digest(), HMac(SHA512Digest(), 128))
-      ..init(true, PrivateKeyParameter(ECPrivateKey(privateKey, _params)));
+    final sig = signer.generateSignature(data) as ECSignature;
 
-    var sig = signer.generateSignature(data) as ECSignature;
+    final ecdsaSigASN = ASN1Sequence()
+      ..add(ASN1Integer(sig.r))
+      ..add(ASN1Integer(sig.s));
 
-    // final info = SignatureInfo.create();
-    // info.publicKey = publickKeyBase64;
-    // info.sign = sig.toString();
+    final pubASN = ASN1Sequence()
+      ..add(ASN1Integer(_publicKey.x.toBigInteger()))
+      ..add(ASN1Integer(_publicKey.y.toBigInteger()));
 
-    print('R: ${sig.r.toString()}');
-    print('S: ${sig.s.toString()}');
-    final r = padUint8ListTo32(intToBytes(sig.r));
-    final s = padUint8ListTo32(intToBytes(sig.s));
+    final pbSiginfo = pb.SignatureInfo.create();
+    pbSiginfo.publicKey = base64Encode(pubASN.encodedBytes);
+    pbSiginfo.sign = ecdsaSigASN.encodedBytes;
 
-    return base64.encode(s + r);
+    return pbSiginfo;
   }
 
-  // SignatureInfo signMessageBytes(Uint8List data) {
-  //     final prefix = _messagePrefix + payload.length.toString();
-  //   final prefixBytes = ascii.encode(prefix);
-  //
-  //   // will be a Uint8List, see the documentation of Uint8List.+
-  //   final concat = uint8ListFromList(prefixBytes + payload);
-  //
-  //   return sign(concat, chainId: chainId);
-  // }
-  //
-  // @override
-  String signMessage(String message) => _sign(utf8.encode(message));
+  @override
+  pb.SignatureInfo signMessage(String message) => _sign(utf8.encode(message));
 }
 
 // GM2
