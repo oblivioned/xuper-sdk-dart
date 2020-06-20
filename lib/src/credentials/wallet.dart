@@ -1,76 +1,5 @@
 part of 'package:xuper_sdk/credentials.dart';
 
-abstract class _KeyDerivator {
-  Uint8List deriveKey(Uint8List password);
-
-  String get name;
-  Map<String, dynamic> encode();
-}
-
-class _PBDKDF2KeyDerivator extends _KeyDerivator {
-  final int iterations;
-  final Uint8List salt;
-  final int dklen;
-
-  // The docs (https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition)
-  // say that HMAC with SHA-256 is the only mac supported at the moment
-  static final Mac mac = HMac(SHA256Digest(), 64);
-
-  _PBDKDF2KeyDerivator(this.iterations, this.salt, this.dklen);
-
-  @override
-  Uint8List deriveKey(Uint8List password) {
-    final impl = pbkdf2.PBKDF2KeyDerivator(mac)
-      ..init(Pbkdf2Parameters(salt, iterations, dklen));
-
-    return impl.process(password);
-  }
-
-  @override
-  Map<String, dynamic> encode() {
-    return {
-      'c': iterations,
-      'dklen': dklen,
-      'prf': 'hmac-sha256',
-      'salt': bytesToHex(salt)
-    };
-  }
-
-  @override
-  final String name = 'pbkdf2';
-}
-
-class _ScryptKeyDerivator extends _KeyDerivator {
-  final int dklen;
-  final int n;
-  final int r;
-  final int p;
-  final Uint8List salt;
-
-  _ScryptKeyDerivator(this.dklen, this.n, this.r, this.p, this.salt);
-
-  @override
-  Uint8List deriveKey(Uint8List password) {
-    final impl = scrypt.Scrypt()..init(ScryptParameters(n, r, p, dklen, salt));
-
-    return impl.process(password);
-  }
-
-  @override
-  Map<String, dynamic> encode() {
-    return {
-      'dklen': dklen,
-      'n': n,
-      'r': r,
-      'p': p,
-      'salt': bytesToHex(salt),
-    };
-  }
-
-  @override
-  final String name = 'scrypt';
-}
-
 /// Represents a wallet file. Wallets are used to securely store credentials
 /// like a private key belonging to an Ethereum address. The private key in a
 /// wallet is encrypted with a secret password that needs to be known in order
@@ -78,7 +7,7 @@ class _ScryptKeyDerivator extends _KeyDerivator {
 @immutable
 class Wallet {
   /// The credentials stored in this wallet file
-  final AK privateKey;
+  final AK ak;
 
   /// The key derivator used to obtain the aes decryption key from the password
   final _KeyDerivator _derivator;
@@ -89,10 +18,12 @@ class Wallet {
   final Uint8List _id;
 
   const Wallet._(
-      this.privateKey, this._derivator, this._password, this._iv, this._id);
+      this.ak, this._derivator, this._password, this._iv, this._id);
 
   /// Gets the random uuid assigned to this wallet file
   String get uuid => formatUuid(_id);
+
+  Address get address => ak.address;
 
   /// Encrypts the private key using the secret specified earlier and returns
   /// a json representation of its data as a v3-wallet file.
@@ -249,6 +180,77 @@ class Wallet {
     final aesKey = Uint8List.view(derived.buffer, 0, 16);
 
     final aes = _initCipher(true, aesKey, _iv);
-    return aes.process(intToBytes(privateKey.privateKey));
+    return aes.process(intToBytes(ak.privateKey));
   }
+}
+
+abstract class _KeyDerivator {
+  Uint8List deriveKey(Uint8List password);
+
+  String get name;
+  Map<String, dynamic> encode();
+}
+
+class _PBDKDF2KeyDerivator extends _KeyDerivator {
+  final int iterations;
+  final Uint8List salt;
+  final int dklen;
+
+  // The docs (https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition)
+  // say that HMAC with SHA-256 is the only mac supported at the moment
+  static final Mac mac = HMac(SHA256Digest(), 64);
+
+  _PBDKDF2KeyDerivator(this.iterations, this.salt, this.dklen);
+
+  @override
+  Uint8List deriveKey(Uint8List password) {
+    final impl = pbkdf2.PBKDF2KeyDerivator(mac)
+      ..init(Pbkdf2Parameters(salt, iterations, dklen));
+
+    return impl.process(password);
+  }
+
+  @override
+  Map<String, dynamic> encode() {
+    return {
+      'c': iterations,
+      'dklen': dklen,
+      'prf': 'hmac-sha256',
+      'salt': bytesToHex(salt)
+    };
+  }
+
+  @override
+  final String name = 'pbkdf2';
+}
+
+class _ScryptKeyDerivator extends _KeyDerivator {
+  final int dklen;
+  final int n;
+  final int r;
+  final int p;
+  final Uint8List salt;
+
+  _ScryptKeyDerivator(this.dklen, this.n, this.r, this.p, this.salt);
+
+  @override
+  Uint8List deriveKey(Uint8List password) {
+    final impl = scrypt.Scrypt()..init(ScryptParameters(n, r, p, dklen, salt));
+
+    return impl.process(password);
+  }
+
+  @override
+  Map<String, dynamic> encode() {
+    return {
+      'dklen': dklen,
+      'n': n,
+      'r': r,
+      'p': p,
+      'salt': bytesToHex(salt),
+    };
+  }
+
+  @override
+  final String name = 'scrypt';
 }

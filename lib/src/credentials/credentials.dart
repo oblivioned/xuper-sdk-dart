@@ -28,17 +28,20 @@ class AK implements Credentials {
 
   @override
   BigInt get privateKey => _privateKey;
+
   @override
   String get privateKeyHex =>
       bytesToHex(intToBytes(_privateKey), include0x: true);
+
   @override
   BigInt get publickKey => _publicKey;
+
   @override
   Address get address => _address;
 
   AK._(this._params, this._privateKey) {
     _publicKey = bytesToInt(
-        Uint8List.view((_params.G * _privateKey).getEncoded(false).buffer, 1));
+        Uint8List.view((_params.G * _privateKey).getEncoded(false).buffer, 0));
     _address = Address.fromPublicKey(_publicKey);
   }
 
