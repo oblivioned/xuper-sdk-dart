@@ -5,16 +5,15 @@
 // @dart = 2.3
 // ignore_for_file: camel_case_types,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type
 
-import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'xchain.pb.dart' as $1;
+import 'xchain.pb.dart' as $0;
 
 import 'event.pbenum.dart';
-import 'xchain.pbenum.dart' as $1;
+import 'xchain.pbenum.dart' as $0;
 
 export 'event.pbenum.dart';
 
@@ -84,7 +83,7 @@ class TransactionStatusInfo extends $pb.GeneratedMessage {
     ..aOS(1, 'bcname')
     ..aOS(2, 'initiator')
     ..pPS(3, 'authRequire')
-    ..e<$1.TransactionStatus>(4, 'status', $pb.PbFieldType.OE, defaultOrMaker: $1.TransactionStatus.UNDEFINE, valueOf: $1.TransactionStatus.valueOf, enumValues: $1.TransactionStatus.values)
+    ..e<$0.TransactionStatus>(4, 'status', $pb.PbFieldType.OE, defaultOrMaker: $0.TransactionStatus.UNDEFINE, valueOf: $0.TransactionStatus.valueOf, enumValues: $0.TransactionStatus.values)
     ..hasRequiredFields = false
   ;
 
@@ -125,9 +124,9 @@ class TransactionStatusInfo extends $pb.GeneratedMessage {
   $core.List<$core.String> get authRequire => $_getList(2);
 
   @$pb.TagNumber(4)
-  $1.TransactionStatus get status => $_getN(3);
+  $0.TransactionStatus get status => $_getN(3);
   @$pb.TagNumber(4)
-  set status($1.TransactionStatus v) { setField(4, v); }
+  set status($0.TransactionStatus v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasStatus() => $_has(3);
   @$pb.TagNumber(4)
@@ -139,7 +138,7 @@ class AccountStatusInfo extends $pb.GeneratedMessage {
     ..aOS(1, 'bcname')
     ..pPS(2, 'fromAddr')
     ..pPS(3, 'toAddr')
-    ..e<$1.TransactionStatus>(4, 'status', $pb.PbFieldType.OE, defaultOrMaker: $1.TransactionStatus.UNDEFINE, valueOf: $1.TransactionStatus.valueOf, enumValues: $1.TransactionStatus.values)
+    ..e<$0.TransactionStatus>(4, 'status', $pb.PbFieldType.OE, defaultOrMaker: $0.TransactionStatus.UNDEFINE, valueOf: $0.TransactionStatus.valueOf, enumValues: $0.TransactionStatus.values)
     ..hasRequiredFields = false
   ;
 
@@ -174,9 +173,9 @@ class AccountStatusInfo extends $pb.GeneratedMessage {
   $core.List<$core.String> get toAddr => $_getList(2);
 
   @$pb.TagNumber(4)
-  $1.TransactionStatus get status => $_getN(3);
+  $0.TransactionStatus get status => $_getN(3);
   @$pb.TagNumber(4)
-  set status($1.TransactionStatus v) { setField(4, v); }
+  set status($0.TransactionStatus v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasStatus() => $_has(3);
   @$pb.TagNumber(4)
@@ -578,7 +577,7 @@ class Event extends $pb.GeneratedMessage {
 
 class BlockEvent extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('BlockEvent', package: const $pb.PackageName('pb'), createEmptyInstance: create)
-    ..aOM<$1.InternalBlock>(1, 'block', subBuilder: $1.InternalBlock.create)
+    ..aOM<$0.InternalBlock>(1, 'block', subBuilder: $0.InternalBlock.create)
     ..hasRequiredFields = false
   ;
 
@@ -598,20 +597,20 @@ class BlockEvent extends $pb.GeneratedMessage {
   static BlockEvent _defaultInstance;
 
   @$pb.TagNumber(1)
-  $1.InternalBlock get block => $_getN(0);
+  $0.InternalBlock get block => $_getN(0);
   @$pb.TagNumber(1)
-  set block($1.InternalBlock v) { setField(1, v); }
+  set block($0.InternalBlock v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasBlock() => $_has(0);
   @$pb.TagNumber(1)
   void clearBlock() => clearField(1);
   @$pb.TagNumber(1)
-  $1.InternalBlock ensureBlock() => $_ensure(0);
+  $0.InternalBlock ensureBlock() => $_ensure(0);
 }
 
 class TransactionEvent extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('TransactionEvent', package: const $pb.PackageName('pb'), createEmptyInstance: create)
-    ..aOM<$1.Transaction>(1, 'tx', subBuilder: $1.Transaction.create)
+    ..aOM<$0.Transaction>(1, 'tx', subBuilder: $0.Transaction.create)
     ..hasRequiredFields = false
   ;
 
@@ -631,27 +630,14 @@ class TransactionEvent extends $pb.GeneratedMessage {
   static TransactionEvent _defaultInstance;
 
   @$pb.TagNumber(1)
-  $1.Transaction get tx => $_getN(0);
+  $0.Transaction get tx => $_getN(0);
   @$pb.TagNumber(1)
-  set tx($1.Transaction v) { setField(1, v); }
+  set tx($0.Transaction v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTx() => $_has(0);
   @$pb.TagNumber(1)
   void clearTx() => clearField(1);
   @$pb.TagNumber(1)
-  $1.Transaction ensureTx() => $_ensure(0);
+  $0.Transaction ensureTx() => $_ensure(0);
 }
 
-class PubsubServiceApi {
-  $pb.RpcClient _client;
-  PubsubServiceApi(this._client);
-
-  $async.Future<Event> subscribe($pb.ClientContext ctx, EventRequest request) {
-    var emptyResponse = Event();
-    return _client.invoke<Event>(ctx, 'PubsubService', 'Subscribe', request, emptyResponse);
-  }
-  $async.Future<UnsubscribeResponse> unsubscribe($pb.ClientContext ctx, UnsubscribeRequest request) {
-    var emptyResponse = UnsubscribeResponse();
-    return _client.invoke<UnsubscribeResponse>(ctx, 'PubsubService', 'Unsubscribe', request, emptyResponse);
-  }
-}

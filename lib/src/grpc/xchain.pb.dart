@@ -5,13 +5,12 @@
 // @dart = 2.3
 // ignore_for_file: camel_case_types,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type
 
-import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'chainedbft.pb.dart' as $0;
+import 'chainedbft.pb.dart' as $4;
 
 import 'xchain.pbenum.dart';
 
@@ -1500,7 +1499,7 @@ class InternalBlock extends $pb.GeneratedMessage {
     ..aInt64(17, 'curBlockNum', protoName: 'curBlockNum')
     ..m<$core.String, $core.String>(18, 'failedTxs', entryClassName: 'InternalBlock.FailedTxsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('pb'))
     ..a<$core.int>(19, 'targetBits', $pb.PbFieldType.O3, protoName: 'targetBits')
-    ..aOM<$0.QuorumCert>(20, 'Justify', protoName: 'Justify', subBuilder: $0.QuorumCert.create)
+    ..aOM<$4.QuorumCert>(20, 'Justify', protoName: 'Justify', subBuilder: $4.QuorumCert.create)
     ..hasRequiredFields = false
   ;
 
@@ -1673,15 +1672,15 @@ class InternalBlock extends $pb.GeneratedMessage {
   void clearTargetBits() => clearField(19);
 
   @$pb.TagNumber(20)
-  $0.QuorumCert get justify => $_getN(19);
+  $4.QuorumCert get justify => $_getN(19);
   @$pb.TagNumber(20)
-  set justify($0.QuorumCert v) { setField(20, v); }
+  set justify($4.QuorumCert v) { setField(20, v); }
   @$pb.TagNumber(20)
   $core.bool hasJustify() => $_has(19);
   @$pb.TagNumber(20)
   void clearJustify() => clearField(20);
   @$pb.TagNumber(20)
-  $0.QuorumCert ensureJustify() => $_ensure(19);
+  $4.QuorumCert ensureJustify() => $_ensure(19);
 }
 
 class BCStatus extends $pb.GeneratedMessage {
@@ -5590,131 +5589,5 @@ class CrossQueryInfo extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(3)
   $core.List<SignatureInfo> get signs => $_getList(2);
-}
-
-class XchainApi {
-  $pb.RpcClient _client;
-  XchainApi(this._client);
-
-  $async.Future<UtxoOutput> selectUTXOBySize($pb.ClientContext ctx, UtxoInput request) {
-    var emptyResponse = UtxoOutput();
-    return _client.invoke<UtxoOutput>(ctx, 'Xchain', 'SelectUTXOBySize', request, emptyResponse);
-  }
-  $async.Future<CommonReply> postTx($pb.ClientContext ctx, TxStatus request) {
-    var emptyResponse = CommonReply();
-    return _client.invoke<CommonReply>(ctx, 'Xchain', 'PostTx', request, emptyResponse);
-  }
-  $async.Future<AclStatus> queryACL($pb.ClientContext ctx, AclStatus request) {
-    var emptyResponse = AclStatus();
-    return _client.invoke<AclStatus>(ctx, 'Xchain', 'QueryACL', request, emptyResponse);
-  }
-  $async.Future<UtxoRecordDetail> queryUtxoRecord($pb.ClientContext ctx, UtxoRecordDetail request) {
-    var emptyResponse = UtxoRecordDetail();
-    return _client.invoke<UtxoRecordDetail>(ctx, 'Xchain', 'QueryUtxoRecord', request, emptyResponse);
-  }
-  $async.Future<ContractStatDataResponse> queryContractStatData($pb.ClientContext ctx, ContractStatDataRequest request) {
-    var emptyResponse = ContractStatDataResponse();
-    return _client.invoke<ContractStatDataResponse>(ctx, 'Xchain', 'QueryContractStatData', request, emptyResponse);
-  }
-  $async.Future<GetAccountContractsResponse> getAccountContracts($pb.ClientContext ctx, GetAccountContractsRequest request) {
-    var emptyResponse = GetAccountContractsResponse();
-    return _client.invoke<GetAccountContractsResponse>(ctx, 'Xchain', 'GetAccountContracts', request, emptyResponse);
-  }
-  $async.Future<TxStatus> queryTx($pb.ClientContext ctx, TxStatus request) {
-    var emptyResponse = TxStatus();
-    return _client.invoke<TxStatus>(ctx, 'Xchain', 'QueryTx', request, emptyResponse);
-  }
-  $async.Future<AddressStatus> getBalance($pb.ClientContext ctx, AddressStatus request) {
-    var emptyResponse = AddressStatus();
-    return _client.invoke<AddressStatus>(ctx, 'Xchain', 'GetBalance', request, emptyResponse);
-  }
-  $async.Future<AddressBalanceStatus> getBalanceDetail($pb.ClientContext ctx, AddressBalanceStatus request) {
-    var emptyResponse = AddressBalanceStatus();
-    return _client.invoke<AddressBalanceStatus>(ctx, 'Xchain', 'GetBalanceDetail', request, emptyResponse);
-  }
-  $async.Future<AddressStatus> getFrozenBalance($pb.ClientContext ctx, AddressStatus request) {
-    var emptyResponse = AddressStatus();
-    return _client.invoke<AddressStatus>(ctx, 'Xchain', 'GetFrozenBalance', request, emptyResponse);
-  }
-  $async.Future<Block> getBlock($pb.ClientContext ctx, BlockID request) {
-    var emptyResponse = Block();
-    return _client.invoke<Block>(ctx, 'Xchain', 'GetBlock', request, emptyResponse);
-  }
-  $async.Future<Block> getBlockByHeight($pb.ClientContext ctx, BlockHeight request) {
-    var emptyResponse = Block();
-    return _client.invoke<Block>(ctx, 'Xchain', 'GetBlockByHeight', request, emptyResponse);
-  }
-  $async.Future<BCStatus> getBlockChainStatus($pb.ClientContext ctx, BCStatus request) {
-    var emptyResponse = BCStatus();
-    return _client.invoke<BCStatus>(ctx, 'Xchain', 'GetBlockChainStatus', request, emptyResponse);
-  }
-  $async.Future<BlockChains> getBlockChains($pb.ClientContext ctx, CommonIn request) {
-    var emptyResponse = BlockChains();
-    return _client.invoke<BlockChains>(ctx, 'Xchain', 'GetBlockChains', request, emptyResponse);
-  }
-  $async.Future<SystemsStatusReply> getSystemStatus($pb.ClientContext ctx, CommonIn request) {
-    var emptyResponse = SystemsStatusReply();
-    return _client.invoke<SystemsStatusReply>(ctx, 'Xchain', 'GetSystemStatus', request, emptyResponse);
-  }
-  $async.Future<RawUrl> getNetURL($pb.ClientContext ctx, CommonIn request) {
-    var emptyResponse = RawUrl();
-    return _client.invoke<RawUrl>(ctx, 'Xchain', 'GetNetURL', request, emptyResponse);
-  }
-  $async.Future<UtxoOutput> selectUTXO($pb.ClientContext ctx, UtxoInput request) {
-    var emptyResponse = UtxoOutput();
-    return _client.invoke<UtxoOutput>(ctx, 'Xchain', 'SelectUTXO', request, emptyResponse);
-  }
-  $async.Future<PreExecWithSelectUTXOResponse> preExecWithSelectUTXO($pb.ClientContext ctx, PreExecWithSelectUTXORequest request) {
-    var emptyResponse = PreExecWithSelectUTXOResponse();
-    return _client.invoke<PreExecWithSelectUTXOResponse>(ctx, 'Xchain', 'PreExecWithSelectUTXO', request, emptyResponse);
-  }
-  $async.Future<DeployNativeCodeResponse> deployNativeCode($pb.ClientContext ctx, DeployNativeCodeRequest request) {
-    var emptyResponse = DeployNativeCodeResponse();
-    return _client.invoke<DeployNativeCodeResponse>(ctx, 'Xchain', 'DeployNativeCode', request, emptyResponse);
-  }
-  $async.Future<NativeCodeStatusResponse> nativeCodeStatus($pb.ClientContext ctx, NativeCodeStatusRequest request) {
-    var emptyResponse = NativeCodeStatusResponse();
-    return _client.invoke<NativeCodeStatusResponse>(ctx, 'Xchain', 'NativeCodeStatus', request, emptyResponse);
-  }
-  $async.Future<DposCandidatesResponse> dposCandidates($pb.ClientContext ctx, DposCandidatesRequest request) {
-    var emptyResponse = DposCandidatesResponse();
-    return _client.invoke<DposCandidatesResponse>(ctx, 'Xchain', 'DposCandidates', request, emptyResponse);
-  }
-  $async.Future<DposNominateRecordsResponse> dposNominateRecords($pb.ClientContext ctx, DposNominateRecordsRequest request) {
-    var emptyResponse = DposNominateRecordsResponse();
-    return _client.invoke<DposNominateRecordsResponse>(ctx, 'Xchain', 'DposNominateRecords', request, emptyResponse);
-  }
-  $async.Future<DposNomineeRecordsResponse> dposNomineeRecords($pb.ClientContext ctx, DposNomineeRecordsRequest request) {
-    var emptyResponse = DposNomineeRecordsResponse();
-    return _client.invoke<DposNomineeRecordsResponse>(ctx, 'Xchain', 'DposNomineeRecords', request, emptyResponse);
-  }
-  $async.Future<DposVoteRecordsResponse> dposVoteRecords($pb.ClientContext ctx, DposVoteRecordsRequest request) {
-    var emptyResponse = DposVoteRecordsResponse();
-    return _client.invoke<DposVoteRecordsResponse>(ctx, 'Xchain', 'DposVoteRecords', request, emptyResponse);
-  }
-  $async.Future<DposVotedRecordsResponse> dposVotedRecords($pb.ClientContext ctx, DposVotedRecordsRequest request) {
-    var emptyResponse = DposVotedRecordsResponse();
-    return _client.invoke<DposVotedRecordsResponse>(ctx, 'Xchain', 'DposVotedRecords', request, emptyResponse);
-  }
-  $async.Future<DposCheckResultsResponse> dposCheckResults($pb.ClientContext ctx, DposCheckResultsRequest request) {
-    var emptyResponse = DposCheckResultsResponse();
-    return _client.invoke<DposCheckResultsResponse>(ctx, 'Xchain', 'DposCheckResults', request, emptyResponse);
-  }
-  $async.Future<DposStatusResponse> dposStatus($pb.ClientContext ctx, DposStatusRequest request) {
-    var emptyResponse = DposStatusResponse();
-    return _client.invoke<DposStatusResponse>(ctx, 'Xchain', 'DposStatus', request, emptyResponse);
-  }
-  $async.Future<AK2AccountResponse> getAccountByAK($pb.ClientContext ctx, AK2AccountRequest request) {
-    var emptyResponse = AK2AccountResponse();
-    return _client.invoke<AK2AccountResponse>(ctx, 'Xchain', 'GetAccountByAK', request, emptyResponse);
-  }
-  $async.Future<AddressContractsResponse> getAddressContracts($pb.ClientContext ctx, AddressContractsRequest request) {
-    var emptyResponse = AddressContractsResponse();
-    return _client.invoke<AddressContractsResponse>(ctx, 'Xchain', 'GetAddressContracts', request, emptyResponse);
-  }
-  $async.Future<InvokeRPCResponse> preExec($pb.ClientContext ctx, InvokeRPCRequest request) {
-    var emptyResponse = InvokeRPCResponse();
-    return _client.invoke<InvokeRPCResponse>(ctx, 'Xchain', 'PreExec', request, emptyResponse);
-  }
 }
 

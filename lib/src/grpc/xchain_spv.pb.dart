@@ -9,7 +9,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'xchain.pb.dart' as $1;
+import 'xchain.pb.dart' as $0;
 
 export 'xchain_spv.pbenum.dart';
 
@@ -310,7 +310,7 @@ class Node extends $pb.GeneratedMessage {
 
 class TxInputs extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('TxInputs', package: const $pb.PackageName('pb'), createEmptyInstance: create)
-    ..pc<$1.TxInput>(1, 'txInputList', $pb.PbFieldType.PM, protoName: 'txInputList', subBuilder: $1.TxInput.create)
+    ..pc<$0.TxInput>(1, 'txInputList', $pb.PbFieldType.PM, protoName: 'txInputList', subBuilder: $0.TxInput.create)
     ..hasRequiredFields = false
   ;
 
@@ -330,12 +330,12 @@ class TxInputs extends $pb.GeneratedMessage {
   static TxInputs _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$1.TxInput> get txInputList => $_getList(0);
+  $core.List<$0.TxInput> get txInputList => $_getList(0);
 }
 
 class TxOutputs extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('TxOutputs', package: const $pb.PackageName('pb'), createEmptyInstance: create)
-    ..pc<$1.TxOutput>(1, 'txOutputList', $pb.PbFieldType.PM, protoName: 'txOutputList', subBuilder: $1.TxOutput.create)
+    ..pc<$0.TxOutput>(1, 'txOutputList', $pb.PbFieldType.PM, protoName: 'txOutputList', subBuilder: $0.TxOutput.create)
     ..hasRequiredFields = false
   ;
 
@@ -355,7 +355,7 @@ class TxOutputs extends $pb.GeneratedMessage {
   static TxOutputs _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$1.TxOutput> get txOutputList => $_getList(0);
+  $core.List<$0.TxOutput> get txOutputList => $_getList(0);
 }
 
 class UTXOs extends $pb.GeneratedMessage {

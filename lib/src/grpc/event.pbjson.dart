@@ -145,21 +145,3 @@ const TransactionEvent$json = const {
   ],
 };
 
-const PubsubServiceBase$json = const {
-  '1': 'PubsubService',
-  '2': const [
-    const {'1': 'Subscribe', '2': '.pb.EventRequest', '3': '.pb.Event', '6': true},
-    const {'1': 'Unsubscribe', '2': '.pb.UnsubscribeRequest', '3': '.pb.UnsubscribeResponse', '4': const {}},
-  ],
-};
-
-const PubsubServiceBase$messageJson = const {
-  '.pb.EventRequest': EventRequest$json,
-  '.pb.Event': Event$json,
-  '.pb.BlockStatusInfo': BlockStatusInfo$json,
-  '.pb.TransactionStatusInfo': TransactionStatusInfo$json,
-  '.pb.AccountStatusInfo': AccountStatusInfo$json,
-  '.pb.UnsubscribeRequest': UnsubscribeRequest$json,
-  '.pb.UnsubscribeResponse': UnsubscribeResponse$json,
-};
-
