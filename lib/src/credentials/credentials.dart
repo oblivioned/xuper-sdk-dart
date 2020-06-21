@@ -5,8 +5,7 @@ abstract class Credentials {
   Uint8List get publickKey;
   Address get address;
 
-  // SignatureInfo signMessageBytes(Uint8List data);
-  pb.SignatureInfo signMessage(String message);
+  pb.SignatureInfo sign(Uint8List data, {bool digestBeforSign = false});
 }
 
 enum AKCurve {
@@ -69,8 +68,10 @@ class AK implements Credentials {
   factory AK.fromHex(String hex, {AKCurve curve = AKCurve.P256}) =>
       AK._(_eccurveParametersFrom(curve), bytesToInt(hexToBytes(hex)));
 
-  pb.SignatureInfo _sign(Uint8List data) {
-    final signer = ECDSASigner(null, Mac('SHA-256/HMAC'))
+  @override
+  pb.SignatureInfo sign(Uint8List data, {bool digestBeforSign = false}) {
+    final signer = ECDSASigner(
+        digestBeforSign ? SHA256Digest() : null, Mac('SHA-256/HMAC'))
       ..init(true, PrivateKeyParameter(ECPrivateKey(_privateKey, _params)));
 
     final sig = signer.generateSignature(data) as ECSignature;
@@ -90,8 +91,19 @@ class AK implements Credentials {
     return pbSiginfo;
   }
 
-  @override
-  pb.SignatureInfo signMessage(String message) => _sign(utf8.encode(message));
+  bool verify(Uint8List data, pb.SignatureInfo sig,
+      {bool digestBeforVerify = false}) {
+    final p = (ASN1Parser(sig.sign).nextObject() as ASN1Sequence)
+        .elements
+        .cast<ASN1Integer>();
+
+    final verifyer = ECDSASigner(
+        digestBeforVerify ? SHA256Digest() : null, Mac('SHA-256/HMAC'))
+      ..init(false, PublicKeyParameter(ECPublicKey(_publicKey, _params)));
+
+    return verifyer.verifySignature(
+        data, ECSignature(p[0].valueAsBigInteger, p[1].valueAsBigInteger));
+  }
 }
 
 // GM2
