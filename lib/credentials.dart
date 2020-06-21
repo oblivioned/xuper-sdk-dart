@@ -29,7 +29,7 @@ import 'src/crypto/random_bridge.dart';
 import 'src/utils/typed_data.dart';
 import 'src/utils/uuid.dart';
 
-import 'pb.dart' as pb;
+import 'grpc.dart' as pb;
 import 'crypto.dart';
 
 part 'src/credentials/credentials.dart';

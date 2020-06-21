@@ -3,6 +3,9 @@
 /// More dartdocs go here.
 library xuper_sdk;
 
-export 'src/xuper_sdk_export.dart';
+export 'client.dart';
+export 'credentials.dart';
+export 'crypto.dart';
+export 'grpc.dart';
 
 // TODO: Export any libraries intended for clients of this package.
