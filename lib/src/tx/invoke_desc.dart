@@ -80,9 +80,7 @@ class _DescModuleInvoke extends InvokeDesc {
     request.moduleName = module_name;
     request.methodName = method_name;
 
-    final sortableKeys = args.keys.toList()..sort((a, b) => a.compareTo(b));
-    sortableKeys.forEach((k) {
-      final v = args[k];
+    args.forEach((k, v) {
       if (v is String) {
         request.args[k] = utf8.encode(v);
       } else if (v is num) {
