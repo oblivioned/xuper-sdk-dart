@@ -1,17 +1,17 @@
 part of 'package:xuper_sdk/credentials.dart';
 
 class Address {
-  final Uint8List _bytes;
-  Uint8List get bytes => _bytes;
+  final Uint8List _data;
+  Uint8List get bytes => utf8.encode(toString());
 
-  Address._(this._bytes);
+  Address._(this._data);
 
   factory Address.fromBase58(String base58String) =>
       Address._(Base58Decode(base58String));
 
   factory Address.fromPublicKey(Uint8List pub) {
 
-    // 1.Marshal Data 4为常量，暂时不知表示的意思
+    // 1.Marshal Data 4为常量，ASN1编码中定义的这个常量4，应该是表示类型
     // final pubBytes = intToBytes(pub);
 
     // 2.SHA256
@@ -30,11 +30,11 @@ class Address {
   }
 
   @override
-  String toString() => Base58Encode(_bytes);
+  String toString() => Base58Encode(_data);
 
   @override
   bool operator ==(Object other) =>
       other is Address &&
       runtimeType == other.runtimeType &&
-      _bytes == other.bytes;
+      _data == other._data;
 }

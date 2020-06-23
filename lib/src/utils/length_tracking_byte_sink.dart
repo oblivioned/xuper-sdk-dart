@@ -19,6 +19,10 @@ class LengthTrackingByteSink extends ByteConversionSinkBase {
     _length += chunk.length;
   }
 
+  void addLine(String s) => add(utf8.encode('$s\n'));
+
+  void addString(String s) => add(utf8.encode(s));
+
   void addByte(int byte) {
     _buffer.add(byte);
     _length++;

@@ -4,8 +4,11 @@ abstract class Credentials {
   Uint8List get privateKey;
   Uint8List get publickKey;
   Address get address;
+  String get curvname;
 
   pb.SignatureInfo sign(Uint8List data, {bool digestBeforSign = false});
+  bool verify(Uint8List data, pb.SignatureInfo sig,
+      {bool digestBeforVerify = false});
 }
 
 enum AKCurve {
@@ -13,6 +16,10 @@ enum AKCurve {
   P256,
   // GM2
 }
+
+const _AKCurveNames = <AKCurve, String>{
+    AKCurve.P256: 'P-256'
+};
 
 ECDomainParameters _eccurveParametersFrom(AKCurve c) {
   switch (c) {
@@ -26,6 +33,7 @@ ECDomainParameters _eccurveParametersFrom(AKCurve c) {
 class AK implements Credentials {
   final ECDomainParameters _params;
   final BigInt _privateKey;
+  final AKCurve _curve;
 
   ECPoint _publicKey;
   Address _address;
@@ -40,7 +48,10 @@ class AK implements Credentials {
   @override
   Address get address => _address;
 
-  AK._(this._params, this._privateKey) {
+  @override
+  String get curvname => _AKCurveNames[_curve];
+
+  AK._(this._curve, this._params, this._privateKey) {
     _publicKey = _params.G * _privateKey;
     _address = Address.fromPublicKey(publickKey);
   }
@@ -56,17 +67,17 @@ class AK implements Credentials {
     final key = generator.generateKeyPair();
     final privateKey = key.privateKey as ECPrivateKey;
 
-    return AK._(params, privateKey.d);
+    return AK._(curve, params, privateKey.d);
   }
 
   factory AK.fromPrivateKey(BigInt d, {AKCurve curve = AKCurve.P256}) =>
-      AK._(_eccurveParametersFrom(curve), d);
+      AK._(curve, _eccurveParametersFrom(curve), d);
 
   factory AK.fromPrivateKeyBytes(Uint8List d, {AKCurve curve = AKCurve.P256}) =>
-      AK._(_eccurveParametersFrom(curve), bytesToInt(d));
+      AK._(curve, _eccurveParametersFrom(curve), bytesToInt(d));
 
   factory AK.fromHex(String hex, {AKCurve curve = AKCurve.P256}) =>
-      AK._(_eccurveParametersFrom(curve), bytesToInt(hexToBytes(hex)));
+      AK._(curve, _eccurveParametersFrom(curve), bytesToInt(hexToBytes(hex)));
 
   @override
   pb.SignatureInfo sign(Uint8List data, {bool digestBeforSign = false}) {
@@ -80,17 +91,17 @@ class AK implements Credentials {
       ..add(ASN1Integer(sig.r))
       ..add(ASN1Integer(sig.s));
 
-    final pubASN = ASN1Sequence()
-      ..add(ASN1Integer(_publicKey.x.toBigInteger()))
-      ..add(ASN1Integer(_publicKey.y.toBigInteger()));
-
     final pbSiginfo = pb.SignatureInfo.create();
-    pbSiginfo.publicKey = base64Encode(pubASN.encodedBytes);
     pbSiginfo.sign = ecdsaSigASN.encodedBytes;
+
+    /// 格式如下:
+    /// {\"Curvname\":\"P-256\",\"X\":74695617477160058757747208220371236837474210247114418775262229497812962582435,\"Y\":51348715319124770392993866417088542497927816017012182211244120852620959209571}
+    pbSiginfo.publicKey = '{"Curvname":"$curvname","X":${_publicKey.x.toString()},"Y":${_publicKey.y.toString()}}';
 
     return pbSiginfo;
   }
 
+  @override
   bool verify(Uint8List data, pb.SignatureInfo sig,
       {bool digestBeforVerify = false}) {
     final p = (ASN1Parser(sig.sign).nextObject() as ASN1Sequence)
