@@ -17,8 +17,7 @@ class Wallet {
 
   final Uint8List _id;
 
-  const Wallet._(
-      this.ak, this._derivator, this._password, this._iv, this._id);
+  const Wallet._(this.ak, this._derivator, this._password, this._iv, this._id);
 
   /// Gets the random uuid assigned to this wallet file
   String get uuid => formatUuid(_id);
@@ -52,8 +51,7 @@ class Wallet {
   /// You can configure the parameter N of the scrypt algorithm if you need to.
   /// The default value for [scryptN] is 8192. Be aware that this N must be a
   /// power of two.
-  factory Wallet.createNew(
-      AK credentials, String password, Random random,
+  factory Wallet.createNew(AK credentials, String password, Random random,
       {int scryptN = 8192}) {
     final passwordBytes = Uint8List.fromList(utf8.encode(password));
     final dartRandom = RandomBridge(random);

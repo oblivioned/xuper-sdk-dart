@@ -15,7 +15,8 @@ class TransactionSigner {
   final Transaction _tx;
   final Map<Address, SignatureInfo> _sigMapping = <Address, SignatureInfo>{};
 
-  TransactionSigner._(this._bcname, this._client, this._initor, this._authRequires, this._tx);
+  TransactionSigner._(
+      this._bcname, this._client, this._initor, this._authRequires, this._tx);
 
   /// 内部逻辑会自动识别是Initor还是AuthRequires
   TransactionSigner sign(Credentials cred) {

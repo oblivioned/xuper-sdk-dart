@@ -17,9 +17,7 @@ enum AKCurve {
   // GM2
 }
 
-const _AKCurveNames = <AKCurve, String>{
-    AKCurve.P256: 'P-256'
-};
+const _AKCurveNames = <AKCurve, String>{AKCurve.P256: 'P-256'};
 
 ECDomainParameters _eccurveParametersFrom(AKCurve c) {
   switch (c) {
@@ -96,7 +94,8 @@ class AK implements Credentials {
 
     /// 格式如下:
     /// {\"Curvname\":\"P-256\",\"X\":74695617477160058757747208220371236837474210247114418775262229497812962582435,\"Y\":51348715319124770392993866417088542497927816017012182211244120852620959209571}
-    pbSiginfo.publicKey = '{"Curvname":"$curvname","X":${_publicKey.x.toString()},"Y":${_publicKey.y.toString()}}';
+    pbSiginfo.publicKey =
+        '{"Curvname":"$curvname","X":${_publicKey.x.toString()},"Y":${_publicKey.y.toString()}}';
 
     return pbSiginfo;
   }

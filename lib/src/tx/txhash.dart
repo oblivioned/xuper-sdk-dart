@@ -169,7 +169,8 @@ extension TXHash on Transaction {
     for (final _output in txOutputs) {
       final out = {
         if (_output.hasAmount()) 'amount': $base64(_output.amount),
-        if (_output.hasToAddr()) 'to_addr': $base64(_output.toAddr),
+        if (_output.hasToAddr())
+          'to_addr': $base64(_output.toAddr),
         // int的取值范围应该够用，不需要Bigint对象,而且写入Bigint可能会导致转化json的时候变成字符串，导致hash不一致
         if (_output.frozenHeight != 0)
           'frozen_height': _output.frozenHeight.toInt(),

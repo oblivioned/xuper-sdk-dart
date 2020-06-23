@@ -31,10 +31,7 @@ class TransactionBuilder {
           @required Address initor,
           List<Address> authRequires = const <Address>[],
           InvokeDesc desc}) =>
-      TransactionBuilder._(
-          bcname,
-          client,
-          initor,
+      TransactionBuilder._(bcname, client, initor,
           authRequires.isEmpty ? [initor] : authRequires,
           desc: desc);
 
@@ -47,8 +44,8 @@ class TransactionBuilder {
   void addDesc(InvokeDesc desc) => _descs.add(desc);
   void addDescAll(Iterable<InvokeDesc> it) => _descs.addAll(it);
 
-  Future<TransactionSigner> build() => buildTransaction()
-      .then((tx) => TransactionSigner._(bcname, client, initor, authRequires, tx));
+  Future<TransactionSigner> build() => buildTransaction().then(
+      (tx) => TransactionSigner._(bcname, client, initor, authRequires, tx));
 
   /// 构建交易对象,通过构建后相当于除了签名其他数据都是完整的，虽然暂时不能用来计算txid，但是可以进行后续的签名操作，
   /// 若执意需要在获取交易对象，请注意，返回的对象是未签名的，`是不完整的交易`（我很想设置为private，但是或许你会有使

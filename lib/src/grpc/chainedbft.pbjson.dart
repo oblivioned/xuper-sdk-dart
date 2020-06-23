@@ -21,16 +21,37 @@ const QuorumCert$json = const {
   '2': const [
     const {'1': 'ProposalId', '3': 1, '4': 1, '5': 12, '10': 'ProposalId'},
     const {'1': 'ProposalMsg', '3': 2, '4': 1, '5': 12, '10': 'ProposalMsg'},
-    const {'1': 'Type', '3': 3, '4': 1, '5': 14, '6': '.pb.QCState', '10': 'Type'},
+    const {
+      '1': 'Type',
+      '3': 3,
+      '4': 1,
+      '5': 14,
+      '6': '.pb.QCState',
+      '10': 'Type'
+    },
     const {'1': 'ViewNumber', '3': 4, '4': 1, '5': 3, '10': 'ViewNumber'},
-    const {'1': 'SignInfos', '3': 5, '4': 1, '5': 11, '6': '.pb.QCSignInfos', '10': 'SignInfos'},
+    const {
+      '1': 'SignInfos',
+      '3': 5,
+      '4': 1,
+      '5': 11,
+      '6': '.pb.QCSignInfos',
+      '10': 'SignInfos'
+    },
   ],
 };
 
 const QCSignInfos$json = const {
   '1': 'QCSignInfos',
   '2': const [
-    const {'1': 'QCSignInfos', '3': 1, '4': 3, '5': 11, '6': '.pb.SignInfo', '10': 'QCSignInfos'},
+    const {
+      '1': 'QCSignInfos',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.pb.SignInfo',
+      '10': 'QCSignInfos'
+    },
   ],
 };
 
@@ -46,12 +67,40 @@ const SignInfo$json = const {
 const ChainedBftPhaseMessage$json = const {
   '1': 'ChainedBftPhaseMessage',
   '2': const [
-    const {'1': 'Type', '3': 1, '4': 1, '5': 14, '6': '.pb.QCState', '10': 'Type'},
+    const {
+      '1': 'Type',
+      '3': 1,
+      '4': 1,
+      '5': 14,
+      '6': '.pb.QCState',
+      '10': 'Type'
+    },
     const {'1': 'ViewNumber', '3': 2, '4': 1, '5': 3, '10': 'ViewNumber'},
-    const {'1': 'ProposalQC', '3': 3, '4': 1, '5': 11, '6': '.pb.QuorumCert', '10': 'ProposalQC'},
-    const {'1': 'JustifyQC', '3': 4, '4': 1, '5': 11, '6': '.pb.QuorumCert', '10': 'JustifyQC'},
+    const {
+      '1': 'ProposalQC',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.pb.QuorumCert',
+      '10': 'ProposalQC'
+    },
+    const {
+      '1': 'JustifyQC',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.pb.QuorumCert',
+      '10': 'JustifyQC'
+    },
     const {'1': 'MsgDigest', '3': 5, '4': 1, '5': 12, '10': 'MsgDigest'},
-    const {'1': 'Signature', '3': 6, '4': 1, '5': 11, '6': '.pb.SignInfo', '10': 'Signature'},
+    const {
+      '1': 'Signature',
+      '3': 6,
+      '4': 1,
+      '5': 11,
+      '6': '.pb.SignInfo',
+      '10': 'Signature'
+    },
   ],
 };
 
@@ -59,7 +108,13 @@ const ChainedBftVoteMessage$json = const {
   '1': 'ChainedBftVoteMessage',
   '2': const [
     const {'1': 'ProposalId', '3': 1, '4': 1, '5': 12, '10': 'ProposalId'},
-    const {'1': 'Signature', '3': 2, '4': 1, '5': 11, '6': '.pb.SignInfo', '10': 'Signature'},
+    const {
+      '1': 'Signature',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.pb.SignInfo',
+      '10': 'Signature'
+    },
   ],
 };
-
