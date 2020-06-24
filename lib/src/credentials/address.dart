@@ -6,6 +6,8 @@ class Address {
 
   Address._(this._data);
 
+  factory Address.fromString(String address) => Address.fromBase58(address);
+
   factory Address.fromBase58(String base58String) =>
       Address._(Base58Decode(base58String));
 
@@ -33,8 +35,10 @@ class Address {
   String toString() => Base58Encode(_data);
 
   @override
+  int get hashCode => toString().hashCode;
+
+  @override
   bool operator ==(Object other) =>
       other is Address &&
-      runtimeType == other.runtimeType &&
-      _data == other._data;
+      toString() == other.toString();
 }

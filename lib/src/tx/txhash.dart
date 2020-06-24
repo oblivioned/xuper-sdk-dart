@@ -103,6 +103,8 @@ extension TXHash on Transaction {
     /// 15.autogen
     autogen ? sink.addLine('true') : sink.addLine('false');
 
+    // print(utf8.decode(sink.asBytes()));
+
     /// double sha256
     return keccak256(keccak256(sink.asBytes()));
   }

@@ -16,7 +16,6 @@ class TransactionSender {
     tx_status.status = TransactionStatus.UNCONFIRM;
     tx_status.tx = _tx;
     tx_status.txid = txid;
-
     return _client.xchainServices.postTx(tx_status);
   }
 

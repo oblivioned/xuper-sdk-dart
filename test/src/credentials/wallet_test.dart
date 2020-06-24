@@ -13,7 +13,6 @@ defineTests() {
         final keystorejson = wallet.toJson();
 
         final recoverWallet = Wallet.fromJson(keystorejson, 'xuper-sdk-dart');
-
         expect(cred.address.toString(), recoverWallet.address.toString(), reason: 'address mismatch.');
         expect(cred.privateKey, recoverWallet.ak.privateKey, reason: 'privatekey mismatch.');
     });

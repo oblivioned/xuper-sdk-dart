@@ -15,7 +15,8 @@ class TransactionSigner {
   final Transaction _tx;
   final Map<Address, SignatureInfo> _sigMapping = <Address, SignatureInfo>{};
 
-  TransactionSigner._(this._bcname, this._client, this._initor, this._authRequires, this._tx);
+  TransactionSigner._(
+      this._bcname, this._client, this._initor, this._authRequires, this._tx);
 
   /// 内部逻辑会自动识别是Initor还是AuthRequires
   TransactionSigner sign(Credentials cred) {
@@ -52,6 +53,29 @@ class TransactionSigner {
     return this;
   }
 
+  // 请求远程结点对交易填充签名
+  // 如黄反服务
+  Future<TransactionSigner> requestSignature(Address address, {String host, int port = 37101}) {
+
+    XuperClient _remoteClient = _client;
+    if ( host != null && host.isNotEmpty ) {
+        _remoteClient = XuperClient.connect(host, port);
+    }
+
+    final tx_status = TxStatus();
+    tx_status.bcname = _bcname;
+    tx_status.status = TransactionStatus.UNCONFIRM;
+    tx_status.tx = _tx;
+
+    return _remoteClient.xcheckServices.complianceCheck(tx_status).then((checkRsp) {
+      if (checkRsp.header.error == XChainErrorEnum.SUCCESS) {
+         _sigMapping[address] = checkRsp.signature;
+      }
+
+      return Future.value(this);
+    });
+  }
+
   TransactionSender build() {
     // 返回一个新的实例，否则可能由于多次使用build导致签名重复
     final txCloned = _tx.clone();
@@ -63,8 +87,10 @@ class TransactionSigner {
     // 添加initor签名
     txCloned.initiatorSigns.add(_sigMapping[_initor]);
 
-    // 添加authrequires签名
-    txCloned.authRequireSigns.addAll(_sigMapping.values);
+    // 添加authrequires签名,需要按照authRequires的顺序写入
+    _authRequires.forEach((addr) {
+        txCloned.authRequireSigns.add(_sigMapping[addr]);
+    });
 
     // 填充txid
     txCloned.txid = txCloned._makeDigestHash;

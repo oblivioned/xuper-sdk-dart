@@ -40,8 +40,6 @@ void defineTests() {
         final signData = utf8.encode('xuper-sdk-dart');
         final sig = cred.sign(signData);
 
-        print(sig.sign);
-
         expect(cred.verify(signData, sig), true);
     });
   });
