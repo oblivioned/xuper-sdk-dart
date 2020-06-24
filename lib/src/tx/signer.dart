@@ -15,6 +15,9 @@ class TransactionSigner {
   final Transaction _tx;
   final Map<Address, SignatureInfo> _sigMapping = <Address, SignatureInfo>{};
 
+  // 用于签名的rawtx的hash值，不包含签名的其他所有数据的摘要。
+  Uint8List get rawTransactionDigestHash => _tx._makeDigestHash;
+
   TransactionSigner._(
       this._bcname, this._client, this._initor, this._authRequires, this._tx);
 
