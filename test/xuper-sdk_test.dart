@@ -1,8 +1,6 @@
 import 'package:xuper_sdk/xuper-sdk.dart';
 import 'package:test/test.dart';
-
-final ChannelInfo = const XuperClientChannel(
-    host: '14.215.179.74', port: 37101, securable: false);
+import 'config.dart';
 
 void main() => defineTests();
 

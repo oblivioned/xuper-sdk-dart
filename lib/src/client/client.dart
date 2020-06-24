@@ -22,17 +22,19 @@ class XuperClient {
   final Map<XuperServicesType, grpc.ClientChannel> _channelConfig;
 
   XchainClient _xchainServices;
-  PubsubServiceClient _pubsubServices;
   XcheckClient _xcheckServices;
   xendorserClient _xendorserServices;
+
+  // 做了二次封装的pubsubservices
+  PubsubServices _pubsubServices;
 
   Map<XuperServicesType, grpc.ClientChannel> get channels => _channelConfig;
 
   XchainClient get xchainServices =>
       _xchainServices ??= XchainClient(_channelConfig[XuperServicesType.Main]);
 
-  PubsubServiceClient get pubsubServices => _pubsubServices ??=
-      PubsubServiceClient(_channelConfig[XuperServicesType.Main]);
+  PubsubServices get pubsubServices => _pubsubServices ??=
+      PubsubServices(_channelConfig[XuperServicesType.Main]);
 
   XcheckClient get xcheckServices =>
       _xcheckServices ??= XcheckClient(_channelConfig[XuperServicesType.Main]);
