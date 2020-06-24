@@ -10,16 +10,12 @@ class TransactionSender {
 
   TransactionSender._(this._bcname, this._client, this._tx);
 
-  Future<CommonReply> doSend() {
-    final tx_status = TxStatus();
-    tx_status.bcname = _bcname;
-    tx_status.status = TransactionStatus.UNCONFIRM;
-    tx_status.tx = _tx;
-    tx_status.txid = txid;
-    return _client.xchainServices.postTx(tx_status);
-  }
+  Future<CommonReply> doSend() =>
+      _client.xchainServices.postTx(_buildTxStatus());
 
-  Stream<CommonReply> doSendAsStream() => doSend().asStream();
-
-  String toString() => txidHex;
+  TxStatus _buildTxStatus() => TxStatus()
+    ..bcname = _bcname
+    ..status = TransactionStatus.UNCONFIRM
+    ..txid = txid
+    ..tx = _tx;
 }

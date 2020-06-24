@@ -58,11 +58,14 @@ class TransactionSigner {
 
   // 请求远程结点对交易填充签名
   // 如黄反服务
-  Future<TransactionSigner> requestSignature(Address address, {String host, int port = 37101}) {
+  Future<TransactionSigner> requestSignature(Address address,
+      {XuperClientChannel remoteChannel}) {
+    XcheckClient checkServices;
 
-    XuperClient _remoteClient = _client;
-    if ( host != null && host.isNotEmpty ) {
-        _remoteClient = XuperClient.connect(host, port);
+    if (remoteChannel != null) {
+      checkServices = XcheckClient(remoteChannel.grpChannel);
+    } else {
+      checkServices = _client.xcheckServices;
     }
 
     final tx_status = TxStatus();
@@ -70,9 +73,9 @@ class TransactionSigner {
     tx_status.status = TransactionStatus.UNCONFIRM;
     tx_status.tx = _tx;
 
-    return _remoteClient.xcheckServices.complianceCheck(tx_status).then((checkRsp) {
+    return checkServices.complianceCheck(tx_status).then((checkRsp) {
       if (checkRsp.header.error == XChainErrorEnum.SUCCESS) {
-         _sigMapping[address] = checkRsp.signature;
+        _sigMapping[address] = checkRsp.signature;
       }
 
       return Future.value(this);
@@ -92,7 +95,7 @@ class TransactionSigner {
 
     // 添加authrequires签名,需要按照authRequires的顺序写入
     _authRequires.forEach((addr) {
-        txCloned.authRequireSigns.add(_sigMapping[addr]);
+      txCloned.authRequireSigns.add(_sigMapping[addr]);
     });
 
     // 填充txid

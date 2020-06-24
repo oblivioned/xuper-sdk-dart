@@ -1,7 +1,8 @@
 import 'package:xuper_sdk/xuper-sdk.dart';
 import 'package:test/test.dart';
 
-const NodeInfo = {'url': '14.215.179.74', 'port': 37101, 'securable': false};
+final ChannelInfo = const XuperClientChannel(
+    host: '14.215.179.74', port: 37101, securable: false);
 
 void main() => defineTests();
 
@@ -12,8 +13,7 @@ void defineTests() {
     setUpAll(() async {
       cred = AK.fromPrivateKey(BigInt.parse(
           '75202845926831956038551478072726757313337723729547574945610490245988704089284'));
-      client = XuperClient.connect(NodeInfo['url'], NodeInfo['port'],
-          securable: NodeInfo['securable']);
+      client = XuperClient.connect(ChannelInfo);
     });
     test('getBlockByHeight', () async {
       final blockHeight = BlockHeight.create();
