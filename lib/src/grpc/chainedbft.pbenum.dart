@@ -16,7 +16,7 @@ class QCState extends $pb.ProtobufEnum {
   static const QCState COMMIT = QCState._(3, 'COMMIT');
   static const QCState DECIDE = QCState._(4, 'DECIDE');
 
-  static const $core.List<QCState> values = <QCState> [
+  static const $core.List<QCState> values = <QCState>[
     NEW_VIEW,
     PREPARE,
     PRE_COMMIT,
@@ -24,9 +24,9 @@ class QCState extends $pb.ProtobufEnum {
     DECIDE,
   ];
 
-  static final $core.Map<$core.int, QCState> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static final $core.Map<$core.int, QCState> _byValue =
+      $pb.ProtobufEnum.initByValue(values);
   static QCState valueOf($core.int value) => _byValue[value];
 
   const QCState._($core.int v, $core.String n) : super(v, n);
 }
-

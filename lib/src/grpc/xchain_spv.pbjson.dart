@@ -38,7 +38,13 @@ const ECDSAAccount$json = const {
   '2': const [
     const {'1': 'entropyByte', '3': 1, '4': 1, '5': 12, '10': 'entropyByte'},
     const {'1': 'mnemonic', '3': 2, '4': 1, '5': 9, '10': 'mnemonic'},
-    const {'1': 'jsonPrivateKey', '3': 3, '4': 1, '5': 9, '10': 'jsonPrivateKey'},
+    const {
+      '1': 'jsonPrivateKey',
+      '3': 3,
+      '4': 1,
+      '5': 9,
+      '10': 'jsonPrivateKey'
+    },
     const {'1': 'jsonPublicKey', '3': 4, '4': 1, '5': 9, '10': 'jsonPublicKey'},
     const {'1': 'address', '3': 5, '4': 1, '5': 9, '10': 'address'},
   ],
@@ -57,8 +63,20 @@ const ECDSAAccountFromCloud$json = const {
   '1': 'ECDSAAccountFromCloud',
   '2': const [
     const {'1': 'address', '3': 1, '4': 1, '5': 9, '10': 'address'},
-    const {'1': 'jsonEncryptedPrivateKey', '3': 2, '4': 1, '5': 9, '10': 'jsonEncryptedPrivateKey'},
-    const {'1': 'encryptedMnemonic', '3': 3, '4': 1, '5': 9, '10': 'encryptedMnemonic'},
+    const {
+      '1': 'jsonEncryptedPrivateKey',
+      '3': 2,
+      '4': 1,
+      '5': 9,
+      '10': 'jsonEncryptedPrivateKey'
+    },
+    const {
+      '1': 'encryptedMnemonic',
+      '3': 3,
+      '4': 1,
+      '5': 9,
+      '10': 'encryptedMnemonic'
+    },
   ],
 };
 
@@ -66,8 +84,20 @@ const ECDSAAccountToCloud$json = const {
   '1': 'ECDSAAccountToCloud',
   '2': const [
     const {'1': 'address', '3': 1, '4': 1, '5': 9, '10': 'address'},
-    const {'1': 'jsonEncryptedPrivateKey', '3': 2, '4': 1, '5': 9, '10': 'jsonEncryptedPrivateKey'},
-    const {'1': 'encryptedMnemonic', '3': 3, '4': 1, '5': 9, '10': 'encryptedMnemonic'},
+    const {
+      '1': 'jsonEncryptedPrivateKey',
+      '3': 2,
+      '4': 1,
+      '5': 9,
+      '10': 'jsonEncryptedPrivateKey'
+    },
+    const {
+      '1': 'encryptedMnemonic',
+      '3': 3,
+      '4': 1,
+      '5': 9,
+      '10': 'encryptedMnemonic'
+    },
     const {'1': 'password', '3': 4, '4': 1, '5': 9, '10': 'password'},
   ],
 };
@@ -78,28 +108,55 @@ const Node$json = const {
     const {'1': 'host', '3': 1, '4': 1, '5': 12, '10': 'host'},
     const {'1': 'utxoQueryUrl', '3': 2, '4': 1, '5': 12, '10': 'utxoQueryUrl'},
     const {'1': 'txPostUrl', '3': 3, '4': 1, '5': 12, '10': 'txPostUrl'},
-    const {'1': 'balanceQueryUrl', '3': 4, '4': 1, '5': 12, '10': 'balanceQueryUrl'},
+    const {
+      '1': 'balanceQueryUrl',
+      '3': 4,
+      '4': 1,
+      '5': 12,
+      '10': 'balanceQueryUrl'
+    },
   ],
 };
 
 const TxInputs$json = const {
   '1': 'TxInputs',
   '2': const [
-    const {'1': 'txInputList', '3': 1, '4': 3, '5': 11, '6': '.pb.TxInput', '10': 'txInputList'},
+    const {
+      '1': 'txInputList',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.pb.TxInput',
+      '10': 'txInputList'
+    },
   ],
 };
 
 const TxOutputs$json = const {
   '1': 'TxOutputs',
   '2': const [
-    const {'1': 'txOutputList', '3': 1, '4': 3, '5': 11, '6': '.pb.TxOutput', '10': 'txOutputList'},
+    const {
+      '1': 'txOutputList',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.pb.TxOutput',
+      '10': 'txOutputList'
+    },
   ],
 };
 
 const UTXOs$json = const {
   '1': 'UTXOs',
   '2': const [
-    const {'1': 'uTXOList', '3': 1, '4': 3, '5': 11, '6': '.pb.UTXO', '10': 'uTXOList'},
+    const {
+      '1': 'uTXOList',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.pb.UTXO',
+      '10': 'uTXOList'
+    },
   ],
 };
 
@@ -113,4 +170,3 @@ const UTXO$json = const {
     const {'1': 'refOffset', '3': 5, '4': 1, '5': 5, '10': 'refOffset'},
   ],
 };
-

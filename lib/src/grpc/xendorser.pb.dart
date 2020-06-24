@@ -12,34 +12,46 @@ import 'package:protobuf/protobuf.dart' as $pb;
 import 'xchain.pb.dart' as $0;
 
 class EndorserRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EndorserRequest', package: const $pb.PackageName('pb'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EndorserRequest',
+      package: const $pb.PackageName('pb'), createEmptyInstance: create)
     ..aOM<$0.Header>(1, 'header', subBuilder: $0.Header.create)
     ..aOS(2, 'RequestName', protoName: 'RequestName')
     ..aOS(3, 'BcName', protoName: 'BcName')
-    ..aOM<$0.Transaction>(4, 'Fee', protoName: 'Fee', subBuilder: $0.Transaction.create)
-    ..a<$core.List<$core.int>>(5, 'RequestData', $pb.PbFieldType.OY, protoName: 'RequestData')
-    ..hasRequiredFields = false
-  ;
+    ..aOM<$0.Transaction>(4, 'Fee',
+        protoName: 'Fee', subBuilder: $0.Transaction.create)
+    ..a<$core.List<$core.int>>(5, 'RequestData', $pb.PbFieldType.OY,
+        protoName: 'RequestData')
+    ..hasRequiredFields = false;
 
   EndorserRequest._() : super();
   factory EndorserRequest() => create();
-  factory EndorserRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory EndorserRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory EndorserRequest.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory EndorserRequest.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
   EndorserRequest clone() => EndorserRequest()..mergeFromMessage(this);
-  EndorserRequest copyWith(void Function(EndorserRequest) updates) => super.copyWith((message) => updates(message as EndorserRequest));
+  EndorserRequest copyWith(void Function(EndorserRequest) updates) =>
+      super.copyWith((message) => updates(message as EndorserRequest));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static EndorserRequest create() => EndorserRequest._();
   EndorserRequest createEmptyInstance() => create();
-  static $pb.PbList<EndorserRequest> createRepeated() => $pb.PbList<EndorserRequest>();
+  static $pb.PbList<EndorserRequest> createRepeated() =>
+      $pb.PbList<EndorserRequest>();
   @$core.pragma('dart2js:noInline')
-  static EndorserRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EndorserRequest>(create);
+  static EndorserRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<EndorserRequest>(create);
   static EndorserRequest _defaultInstance;
 
   @$pb.TagNumber(1)
   $0.Header get header => $_getN(0);
   @$pb.TagNumber(1)
-  set header($0.Header v) { setField(1, v); }
+  set header($0.Header v) {
+    setField(1, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasHeader() => $_has(0);
   @$pb.TagNumber(1)
@@ -50,7 +62,10 @@ class EndorserRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get requestName => $_getSZ(1);
   @$pb.TagNumber(2)
-  set requestName($core.String v) { $_setString(1, v); }
+  set requestName($core.String v) {
+    $_setString(1, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasRequestName() => $_has(1);
   @$pb.TagNumber(2)
@@ -59,7 +74,10 @@ class EndorserRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.String get bcName => $_getSZ(2);
   @$pb.TagNumber(3)
-  set bcName($core.String v) { $_setString(2, v); }
+  set bcName($core.String v) {
+    $_setString(2, v);
+  }
+
   @$pb.TagNumber(3)
   $core.bool hasBcName() => $_has(2);
   @$pb.TagNumber(3)
@@ -68,7 +86,10 @@ class EndorserRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $0.Transaction get fee => $_getN(3);
   @$pb.TagNumber(4)
-  set fee($0.Transaction v) { setField(4, v); }
+  set fee($0.Transaction v) {
+    setField(4, v);
+  }
+
   @$pb.TagNumber(4)
   $core.bool hasFee() => $_has(3);
   @$pb.TagNumber(4)
@@ -79,7 +100,10 @@ class EndorserRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $core.List<$core.int> get requestData => $_getN(4);
   @$pb.TagNumber(5)
-  set requestData($core.List<$core.int> v) { $_setBytes(4, v); }
+  set requestData($core.List<$core.int> v) {
+    $_setBytes(4, v);
+  }
+
   @$pb.TagNumber(5)
   $core.bool hasRequestData() => $_has(4);
   @$pb.TagNumber(5)
@@ -87,34 +111,46 @@ class EndorserRequest extends $pb.GeneratedMessage {
 }
 
 class EndorserResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EndorserResponse', package: const $pb.PackageName('pb'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EndorserResponse',
+      package: const $pb.PackageName('pb'), createEmptyInstance: create)
     ..aOM<$0.Header>(1, 'header', subBuilder: $0.Header.create)
     ..aOS(2, 'ResponseName', protoName: 'ResponseName')
     ..aOS(3, 'EndorserAddress', protoName: 'EndorserAddress')
-    ..aOM<$0.SignatureInfo>(4, 'EndorserSign', protoName: 'EndorserSign', subBuilder: $0.SignatureInfo.create)
-    ..a<$core.List<$core.int>>(5, 'ResponseData', $pb.PbFieldType.OY, protoName: 'ResponseData')
-    ..hasRequiredFields = false
-  ;
+    ..aOM<$0.SignatureInfo>(4, 'EndorserSign',
+        protoName: 'EndorserSign', subBuilder: $0.SignatureInfo.create)
+    ..a<$core.List<$core.int>>(5, 'ResponseData', $pb.PbFieldType.OY,
+        protoName: 'ResponseData')
+    ..hasRequiredFields = false;
 
   EndorserResponse._() : super();
   factory EndorserResponse() => create();
-  factory EndorserResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory EndorserResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory EndorserResponse.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory EndorserResponse.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
   EndorserResponse clone() => EndorserResponse()..mergeFromMessage(this);
-  EndorserResponse copyWith(void Function(EndorserResponse) updates) => super.copyWith((message) => updates(message as EndorserResponse));
+  EndorserResponse copyWith(void Function(EndorserResponse) updates) =>
+      super.copyWith((message) => updates(message as EndorserResponse));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static EndorserResponse create() => EndorserResponse._();
   EndorserResponse createEmptyInstance() => create();
-  static $pb.PbList<EndorserResponse> createRepeated() => $pb.PbList<EndorserResponse>();
+  static $pb.PbList<EndorserResponse> createRepeated() =>
+      $pb.PbList<EndorserResponse>();
   @$core.pragma('dart2js:noInline')
-  static EndorserResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EndorserResponse>(create);
+  static EndorserResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<EndorserResponse>(create);
   static EndorserResponse _defaultInstance;
 
   @$pb.TagNumber(1)
   $0.Header get header => $_getN(0);
   @$pb.TagNumber(1)
-  set header($0.Header v) { setField(1, v); }
+  set header($0.Header v) {
+    setField(1, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasHeader() => $_has(0);
   @$pb.TagNumber(1)
@@ -125,7 +161,10 @@ class EndorserResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get responseName => $_getSZ(1);
   @$pb.TagNumber(2)
-  set responseName($core.String v) { $_setString(1, v); }
+  set responseName($core.String v) {
+    $_setString(1, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasResponseName() => $_has(1);
   @$pb.TagNumber(2)
@@ -134,7 +173,10 @@ class EndorserResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.String get endorserAddress => $_getSZ(2);
   @$pb.TagNumber(3)
-  set endorserAddress($core.String v) { $_setString(2, v); }
+  set endorserAddress($core.String v) {
+    $_setString(2, v);
+  }
+
   @$pb.TagNumber(3)
   $core.bool hasEndorserAddress() => $_has(2);
   @$pb.TagNumber(3)
@@ -143,7 +185,10 @@ class EndorserResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $0.SignatureInfo get endorserSign => $_getN(3);
   @$pb.TagNumber(4)
-  set endorserSign($0.SignatureInfo v) { setField(4, v); }
+  set endorserSign($0.SignatureInfo v) {
+    setField(4, v);
+  }
+
   @$pb.TagNumber(4)
   $core.bool hasEndorserSign() => $_has(3);
   @$pb.TagNumber(4)
@@ -154,10 +199,12 @@ class EndorserResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $core.List<$core.int> get responseData => $_getN(4);
   @$pb.TagNumber(5)
-  set responseData($core.List<$core.int> v) { $_setBytes(4, v); }
+  set responseData($core.List<$core.int> v) {
+    $_setBytes(4, v);
+  }
+
   @$pb.TagNumber(5)
   $core.bool hasResponseData() => $_has(4);
   @$pb.TagNumber(5)
   void clearResponseData() => clearField(5);
 }
-

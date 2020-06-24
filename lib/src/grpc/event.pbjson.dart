@@ -41,7 +41,14 @@ const BlockStatusInfo$json = const {
     const {'1': 'bcname', '3': 1, '4': 1, '5': 9, '10': 'bcname'},
     const {'1': 'proposer', '3': 2, '4': 1, '5': 9, '10': 'proposer'},
     const {'1': 'height', '3': 3, '4': 1, '5': 3, '10': 'height'},
-    const {'1': 'status', '3': 4, '4': 1, '5': 14, '6': '.pb.BlockStatus', '10': 'status'},
+    const {
+      '1': 'status',
+      '3': 4,
+      '4': 1,
+      '5': 14,
+      '6': '.pb.BlockStatus',
+      '10': 'status'
+    },
   ],
 };
 
@@ -51,7 +58,14 @@ const TransactionStatusInfo$json = const {
     const {'1': 'bcname', '3': 1, '4': 1, '5': 9, '10': 'bcname'},
     const {'1': 'initiator', '3': 2, '4': 1, '5': 9, '10': 'initiator'},
     const {'1': 'auth_require', '3': 3, '4': 3, '5': 9, '10': 'authRequire'},
-    const {'1': 'status', '3': 4, '4': 1, '5': 14, '6': '.pb.TransactionStatus', '10': 'status'},
+    const {
+      '1': 'status',
+      '3': 4,
+      '4': 1,
+      '5': 14,
+      '6': '.pb.TransactionStatus',
+      '10': 'status'
+    },
   ],
 };
 
@@ -61,14 +75,28 @@ const AccountStatusInfo$json = const {
     const {'1': 'bcname', '3': 1, '4': 1, '5': 9, '10': 'bcname'},
     const {'1': 'from_addr', '3': 2, '4': 3, '5': 9, '10': 'fromAddr'},
     const {'1': 'to_addr', '3': 3, '4': 3, '5': 9, '10': 'toAddr'},
-    const {'1': 'status', '3': 4, '4': 1, '5': 14, '6': '.pb.TransactionStatus', '10': 'status'},
+    const {
+      '1': 'status',
+      '3': 4,
+      '4': 1,
+      '5': 14,
+      '6': '.pb.TransactionStatus',
+      '10': 'status'
+    },
   ],
 };
 
 const EventRequest$json = const {
   '1': 'EventRequest',
   '2': const [
-    const {'1': 'type', '3': 1, '4': 1, '5': 14, '6': '.pb.EventType', '10': 'type'},
+    const {
+      '1': 'type',
+      '3': 1,
+      '4': 1,
+      '5': 14,
+      '6': '.pb.EventType',
+      '10': 'type'
+    },
     const {'1': 'payload', '3': 2, '4': 1, '5': 12, '10': 'payload'},
   ],
 };
@@ -115,7 +143,14 @@ const UnsubscribeResponse$json = const {
   '1': 'UnsubscribeResponse',
   '2': const [
     const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
-    const {'1': 'status', '3': 3, '4': 1, '5': 14, '6': '.pb.UnsubscribeStatusInfo', '10': 'status'},
+    const {
+      '1': 'status',
+      '3': 3,
+      '4': 1,
+      '5': 14,
+      '6': '.pb.UnsubscribeStatusInfo',
+      '10': 'status'
+    },
   ],
 };
 
@@ -123,25 +158,66 @@ const Event$json = const {
   '1': 'Event',
   '2': const [
     const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
-    const {'1': 'type', '3': 2, '4': 1, '5': 14, '6': '.pb.EventType', '10': 'type'},
+    const {
+      '1': 'type',
+      '3': 2,
+      '4': 1,
+      '5': 14,
+      '6': '.pb.EventType',
+      '10': 'type'
+    },
     const {'1': 'payload', '3': 3, '4': 1, '5': 12, '10': 'payload'},
-    const {'1': 'block_status', '3': 4, '4': 1, '5': 11, '6': '.pb.BlockStatusInfo', '10': 'blockStatus'},
-    const {'1': 'tx_status', '3': 5, '4': 1, '5': 11, '6': '.pb.TransactionStatusInfo', '10': 'txStatus'},
-    const {'1': 'account_status', '3': 6, '4': 1, '5': 11, '6': '.pb.AccountStatusInfo', '10': 'accountStatus'},
+    const {
+      '1': 'block_status',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.pb.BlockStatusInfo',
+      '10': 'blockStatus'
+    },
+    const {
+      '1': 'tx_status',
+      '3': 5,
+      '4': 1,
+      '5': 11,
+      '6': '.pb.TransactionStatusInfo',
+      '10': 'txStatus'
+    },
+    const {
+      '1': 'account_status',
+      '3': 6,
+      '4': 1,
+      '5': 11,
+      '6': '.pb.AccountStatusInfo',
+      '10': 'accountStatus'
+    },
   ],
 };
 
 const BlockEvent$json = const {
   '1': 'BlockEvent',
   '2': const [
-    const {'1': 'block', '3': 1, '4': 1, '5': 11, '6': '.pb.InternalBlock', '10': 'block'},
+    const {
+      '1': 'block',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.pb.InternalBlock',
+      '10': 'block'
+    },
   ],
 };
 
 const TransactionEvent$json = const {
   '1': 'TransactionEvent',
   '2': const [
-    const {'1': 'tx', '3': 1, '4': 1, '5': 11, '6': '.pb.Transaction', '10': 'tx'},
+    const {
+      '1': 'tx',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.pb.Transaction',
+      '10': 'tx'
+    },
   ],
 };
-

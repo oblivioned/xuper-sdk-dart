@@ -15,14 +15,15 @@ class BlockStatus extends $pb.ProtobufEnum {
   static const BlockStatus BRANCH = BlockStatus._(2, 'BRANCH');
   static const BlockStatus NONEXIST = BlockStatus._(3, 'NONEXIST');
 
-  static const $core.List<BlockStatus> values = <BlockStatus> [
+  static const $core.List<BlockStatus> values = <BlockStatus>[
     ERROR,
     TRUNK,
     BRANCH,
     NONEXIST,
   ];
 
-  static final $core.Map<$core.int, BlockStatus> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static final $core.Map<$core.int, BlockStatus> _byValue =
+      $pb.ProtobufEnum.initByValue(values);
   static BlockStatus valueOf($core.int value) => _byValue[value];
 
   const BlockStatus._($core.int v, $core.String n) : super(v, n);
@@ -33,9 +34,10 @@ class EventType extends $pb.ProtobufEnum {
   static const EventType BLOCK = EventType._(1, 'BLOCK');
   static const EventType TRANSACTION = EventType._(2, 'TRANSACTION');
   static const EventType ACCOUNT = EventType._(3, 'ACCOUNT');
-  static const EventType SUBSCRIBE_RESPONSE = EventType._(4, 'SUBSCRIBE_RESPONSE');
+  static const EventType SUBSCRIBE_RESPONSE =
+      EventType._(4, 'SUBSCRIBE_RESPONSE');
 
-  static const $core.List<EventType> values = <EventType> [
+  static const $core.List<EventType> values = <EventType>[
     UNDEFINED,
     BLOCK,
     TRANSACTION,
@@ -43,26 +45,31 @@ class EventType extends $pb.ProtobufEnum {
     SUBSCRIBE_RESPONSE,
   ];
 
-  static final $core.Map<$core.int, EventType> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static final $core.Map<$core.int, EventType> _byValue =
+      $pb.ProtobufEnum.initByValue(values);
   static EventType valueOf($core.int value) => _byValue[value];
 
   const EventType._($core.int v, $core.String n) : super(v, n);
 }
 
 class UnsubscribeStatusInfo extends $pb.ProtobufEnum {
-  static const UnsubscribeStatusInfo UNSUBSCRIBE_UNDEFINED = UnsubscribeStatusInfo._(0, 'UNSUBSCRIBE_UNDEFINED');
-  static const UnsubscribeStatusInfo UNSUBSCRIBE_SUCCESS = UnsubscribeStatusInfo._(1, 'UNSUBSCRIBE_SUCCESS');
-  static const UnsubscribeStatusInfo UNSUBSCRIBE_FAILED = UnsubscribeStatusInfo._(2, 'UNSUBSCRIBE_FAILED');
+  static const UnsubscribeStatusInfo UNSUBSCRIBE_UNDEFINED =
+      UnsubscribeStatusInfo._(0, 'UNSUBSCRIBE_UNDEFINED');
+  static const UnsubscribeStatusInfo UNSUBSCRIBE_SUCCESS =
+      UnsubscribeStatusInfo._(1, 'UNSUBSCRIBE_SUCCESS');
+  static const UnsubscribeStatusInfo UNSUBSCRIBE_FAILED =
+      UnsubscribeStatusInfo._(2, 'UNSUBSCRIBE_FAILED');
 
-  static const $core.List<UnsubscribeStatusInfo> values = <UnsubscribeStatusInfo> [
+  static const $core.List<UnsubscribeStatusInfo> values =
+      <UnsubscribeStatusInfo>[
     UNSUBSCRIBE_UNDEFINED,
     UNSUBSCRIBE_SUCCESS,
     UNSUBSCRIBE_FAILED,
   ];
 
-  static final $core.Map<$core.int, UnsubscribeStatusInfo> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static final $core.Map<$core.int, UnsubscribeStatusInfo> _byValue =
+      $pb.ProtobufEnum.initByValue(values);
   static UnsubscribeStatusInfo valueOf($core.int value) => _byValue[value];
 
   const UnsubscribeStatusInfo._($core.int v, $core.String n) : super(v, n);
 }
-
