@@ -15,7 +15,7 @@ class BlockNum {
     return BlockNum(0);
   }
   factory BlockNum.earliest() => BlockNum(0);
-  factory BlockNum.distantFuture() => BlockNum(1 << 63 - 1 );
+  factory BlockNum.latest() => BlockNum(1 << 63 - 1 );
 
   Int64 _toInt64() => Int64.parseInt(_num.toString());
 

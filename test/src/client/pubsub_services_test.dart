@@ -12,7 +12,7 @@ defineTests() {
       client = XuperClient.connect(ChannelInfo);
     });
     test('todo', () async {
-        await client.pubsubServices.subscribeBlockEvent(BlockNum.earliest(), BlockNum.distantFuture()).listen((onData){
+        await client.pubsubServices.subscribeBlockEvent(BlockNum.earliest(), BlockNum.latest()).listen((onData){
             print('SubscribeID: ${onData.id}');
             print('Block: ${onData}');
         }).asFuture();
