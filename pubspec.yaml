@@ -1,14 +1,14 @@
 name: xuper_sdk
 description: A starting point for Dart libraries or applications.
-# version: 1.0.0
-# homepage: https://www.example.com
+version: 0.0.1
+homepage: https://github.com/oblivioned/xuper-sdk-dart
 
 environment:
   sdk: '>=2.7.0 <3.0.0'
 
 dependencies:
   pointycastle: ^1.0.1
-  grpc: ^2.2.0
+  grpc: ^2.1.3
   protobuf: ^1.0.1
   fast_base58: ^0.1.8
   uuid: ^2.0.0
