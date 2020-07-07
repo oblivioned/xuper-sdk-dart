@@ -4,10 +4,11 @@ part of 'package:xuper_sdk/credentials.dart';
 /// like a private key belonging to an Ethereum address. The private key in a
 /// wallet is encrypted with a secret password that needs to be known in order
 /// to obtain the private key.
-@immutable
 class Wallet {
   /// The credentials stored in this wallet file
   final AK ak;
+  String name;
+  String tips;
 
   /// The key derivator used to obtain the aes decryption key from the password
   final _KeyDerivator _derivator;
@@ -17,7 +18,8 @@ class Wallet {
 
   final Uint8List _id;
 
-  const Wallet._(this.ak, this._derivator, this._password, this._iv, this._id);
+  Wallet._(this.ak, this._derivator, this._password, this._iv, this._id,
+      this.name, this.tips);
 
   /// Gets the random uuid assigned to this wallet file
   String get uuid => formatUuid(_id);
@@ -40,6 +42,7 @@ class Wallet {
       },
       'id': uuid,
       'version': 3,
+      'userdata': {'name': name ?? '', 'tips': tips ?? ''}
     };
 
     return json.encode(map);
@@ -52,7 +55,7 @@ class Wallet {
   /// The default value for [scryptN] is 8192. Be aware that this N must be a
   /// power of two.
   factory Wallet.createNew(AK credentials, String password, Random random,
-      {int scryptN = 8192}) {
+      {int scryptN = 8192, String name, String tips}) {
     final passwordBytes = Uint8List.fromList(utf8.encode(password));
     final dartRandom = RandomBridge(random);
 
@@ -63,7 +66,8 @@ class Wallet {
 
     final iv = dartRandom.nextBytes(128 ~/ 8);
 
-    return Wallet._(credentials, derivator, passwordBytes, iv, uuid);
+    return Wallet._(
+        credentials, derivator, passwordBytes, iv, uuid, name, tips);
   }
 
   /// Reads and unlocks the wallet denoted in the json string given with the
@@ -158,7 +162,13 @@ class Wallet {
 
     final id = parseUuid(data['id'] as String);
 
-    return Wallet._(credentials, derivator, encodedPassword, iv, id);
+    if ((data as Map).containsKey('userdata')) {
+      return Wallet._(credentials, derivator, encodedPassword, iv, id,
+          data['userdata']['name'], data['userdata']['tips']);
+    }
+
+    return Wallet._(
+        credentials, derivator, encodedPassword, iv, id, null, null);
   }
 
   static String _generateMac(List<int> dk, List<int> ciphertext) {

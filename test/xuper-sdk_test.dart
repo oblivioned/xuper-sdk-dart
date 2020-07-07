@@ -60,7 +60,10 @@ void defineTests() {
           Address.fromString('XDxkpQkfLwG6h56e896f3vBHhuN5g6M9u'));
 
       // 5.填充initor的签名并且发送
-      final txRsp = await txSigner.sign(cred).build().doSend();
+      final txSender = await txSigner.sign(cred).build();
+      print(bytesToHex(txSender.txid));
+
+      final txRsp = await txSender.doSend();
       expect(txRsp.header.error, XChainErrorEnum.SUCCESS,
           reason: 'transfer transaction send has error.');
 
