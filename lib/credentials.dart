@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
 
-import 'package:meta/meta.dart';
+// import 'package:meta/meta.dart';
 
 import 'package:pointycastle/api.dart';
 import 'package:pointycastle/ecc/curves/prime256v1.dart';

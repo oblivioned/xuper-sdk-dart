@@ -9,7 +9,7 @@ class Address {
   factory Address.fromString(String address) => Address.fromBase58(address);
 
   factory Address.fromBase58(String base58String) =>
-      Address._(Base58Decode(base58String));
+      Address._( Uint8List.fromList(Base58Decode(base58String)));
 
   factory Address.fromPublicKey(Uint8List pub) {
     // 1.Marshal Data 4为常量，ASN1编码中定义的这个常量4，应该是表示类型
